@@ -1,14 +1,16 @@
-import React,{ useEffect, useState, createContext} from 'react'
+import React,{ useEffect, useState} from 'react'
 import Axios from 'axios'
+import Display from './Display'
+import Spinner from './Spinner';
 
 
-export const Context = createContext();
 
-function Trail(props) {
-    const [track,setTrack] = useState([ ]);
+function Trail() {
+   const [track,setTrack] = useState([]);
+   const [Err, setError] = useState();
+   const [show,setShow]=useState(false);
     useEffect(() => {
      Top();
-     Search();
     }, [])
 
     const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
@@ -16,43 +18,50 @@ function Trail(props) {
            const result = await Axios
            .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?
            page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${apiKey}`)
-           .catch (err=>console.log(err));
+           .catch (err=>{
+             if(err){
+                 setError(`Please Try again \t,${err}`);
+             }else{
+                 let track_list = result.data.message.body.track_list;
           
-          let track_list = result.data.message.body.track_list;
-         // console.log(track_list);
-          let a = track_list.map(val=>
-            [{album:val.track.album_name,
-                track:val.track.track_name,
-                artist:val.track.artist_name,
-                track_id:val.track.commontrack_id,
-            }]);
-            setTrack(track.push(...a));
-            console.log(track);
-    }
-
-    const Search =  async()=>{
-        let result = await Axios
-        .get(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track=sad
-        &page_size=5&page=1&s_track_rating=desc&apikey=${apiKey}`)
-        .catch(err=>console.log(err));
-       // console.log(result.data.message.body.track_list);
-        let track_list = result.data.message.body.track_list;
-
-        let a = track_list.map(val=>
-            [{album:val.track.album_name,
-                track:val.track.track_name,
-                artist:val.track.artist_name,
-                track_id:val.track.commontrack_id,
-                //lyric_link:val.track_share_url,
-            }]);
-            console.log(a);
-            
-    }
+                let a = track_list.map(val=>
+                      [{album:val.track.album_name,
+                        track:val.track.track_name,
+                        artist:val.track.artist_name,
+                        track_id:val.track.commontrack_id,
+                    }]);
+                setTrack(a);
+                }
+                 console.log(track);
+            });
+                 track===''?setShow(true):setShow(false);
+    
+                }
+                
     return (
         <> 
-        <Context.Provider value={[track,setTrack]}>
-            {props.children}
-        </Context.Provider>
+        <h2>Top 20 Tracks</h2>
+        <div className='tracks'>
+            <h2>{Err}</h2>
+            <ul>
+
+
+        {
+            track.map((val,index)=>{
+             return( 
+                 <Display
+                    display={show}
+                    key={index}
+                    track={val.track}
+                    album={val.album}
+                    artist={val.artist}
+                    id={val.track_id}
+                 />
+             );
+            })
+        }
+         </ul>
+        </div>
         </>
     )
 }
