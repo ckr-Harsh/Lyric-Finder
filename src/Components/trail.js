@@ -6,11 +6,12 @@ import Spinner from './Spinner';
 
 
 function Trail() {
-   const [track,setTrack] = useState([]);
+   const [t,setTrack] = useState([]);
    const [Err, setError] = useState();
-   const [show,setShow]=useState(false);
+   const [spin ,setSpin]= useState(false);
+ 
     useEffect(() => {
-     Top();
+    // Top();
     }, [])
 
     const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
@@ -18,49 +19,49 @@ function Trail() {
            const result = await Axios
            .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?
            page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${apiKey}`)
+           .then( res=>{  
+              // console.log(JSON.parse(res));
+               res===''?setSpin(true):setSpin(false)
+                let track_list = res.data.message.body.track_list;
+              setTrack(track_list);
+              
+                   
+           })
            .catch (err=>{
-             if(err){
-                 setError(`Please Try again \t,${err}`);
-             }else{
-                 let track_list = result.data.message.body.track_list;
-          
-                let a = track_list.map(val=>
-                      [{album:val.track.album_name,
-                        track:val.track.track_name,
-                        artist:val.track.artist_name,
-                        track_id:val.track.commontrack_id,
-                    }]);
-                setTrack(a);
-                }
-                 console.log(track);
+                 setError(`Please Try again,${err}`);
+                 console.log(err);
             });
-                 track===''?setShow(true):setShow(false);
-    
-                }
-                
+          //  console.log(result);
+        }
+               
+     let  a =   t.map(val=>console.log(val));
+      
+
     return (
         <> 
         <h2>Top 20 Tracks</h2>
         <div className='tracks'>
             <h2>{Err}</h2>
             <ul>
-
-
-        {
-            track.map((val,index)=>{
-             return( 
-                 <Display
-                    display={show}
-                    key={index}
-                    track={val.track}
-                    album={val.album}
-                    artist={val.artist}
-                    id={val.track_id}
-                 />
-             );
-            })
-        }
-         </ul>
+                {
+                    t.map((val,index)=>{
+                        return(
+                            <Display
+                            artist={val.track.artist_name}
+                            track={val.track.track_name}
+                            key={index}
+                            album={val.track.album_name}
+                            t_id={val.track.track_id}
+                            />
+                        
+                        )
+                    })
+                }     
+            </ul>
+            <Spinner style={{
+                visibility:spin?'visible':'hidden'
+            }} />
+            
         </div>
         </>
     )

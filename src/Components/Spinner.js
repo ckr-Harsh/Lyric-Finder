@@ -1,8 +1,7 @@
-import { Visibility } from '@material-ui/icons'
 import React from 'react'
 import spinner from './triangle.gif'
 
-function Spinner(props) {
+function Spinner() {
     return (
         <>
             <img src={spinner} alt='loading'
@@ -10,7 +9,6 @@ function Spinner(props) {
                     width:'200px',
                      margin:'40px auto',
                      display:'block',
-                     Visibility:props.show?'visible':'hidden',
             }}></img>
         </>
     )
