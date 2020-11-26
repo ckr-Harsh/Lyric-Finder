@@ -20,7 +20,8 @@ function Home() {
     const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
     const Search =  async()=>{
         let result = await Axios
-        .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.track.get?q_track=${song}&apikey=${apiKey}`)
+        .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.track.get?
+        q_track=${song}&page_size=5&apikey=${apiKey}`)
         .then(res=>{
             console.log(res);
         })
