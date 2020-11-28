@@ -8,10 +8,11 @@ import Spinner from './Spinner';
 function Trail() {
    const [t,setTrack] = useState([]);
    const [Err, setError] = useState();
-   const [spin ,setSpin]= useState(false);
+   const [spin ,setSpin]= useState(true);
+   
  
     useEffect(() => {
-    // Top();
+      // Top();
     }, [])
 
     const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
@@ -24,6 +25,7 @@ function Trail() {
                res===''?setSpin(true):setSpin(false)
                 let track_list = res.data.message.body.track_list;
               setTrack(track_list);
+              console.log(res);
               
                    
            })
@@ -32,9 +34,7 @@ function Trail() {
                  console.log(err);
             });
           //  console.log(result);
-        }
-               
-     let  a =   t.map(val=>console.log(val));
+        }    
       
 
     return (
@@ -58,10 +58,10 @@ function Trail() {
                     })
                 }     
             </ul>
-            <Spinner style={{
+          
+           {/*   <Spinner style={{
                 visibility:spin?'visible':'hidden'
-            }} />
-            
+            }} />*/}
         </div>
         </>
     )

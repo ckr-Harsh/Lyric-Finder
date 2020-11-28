@@ -1,13 +1,19 @@
 import React from 'react'
 import Trail from './Components/trail'
-import Home from './Components/Home'
+import Head from './Components/Head'
+import {BrowserRouter} from 'react-router-dom'
+import Context from './Components/Context'
  
+
 
 function App() {
   return (
     <>
-      <Home/>
-      <Trail/>
+    <BrowserRouter>
+    <Context>
+      <Head/>
+    </Context>
+    </BrowserRouter>
     </>
   )
 }
