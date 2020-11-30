@@ -12,7 +12,7 @@ function Trail() {
    
  
     useEffect(() => {
-      // Top();
+     //Top();
     }, [])
 
     const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
@@ -58,11 +58,8 @@ function Trail() {
                     })
                 }     
             </ul>
-          
-           {/*   <Spinner style={{
-                visibility:spin?'visible':'hidden'
-            }} />*/}
         </div>
+        { spin?<Spinner/>:''}
         </>
     )
 }

@@ -6,7 +6,7 @@ function Spinner() {
         <>
             <img src={spinner} alt='loading'
              style={{
-                    width:'200px',
+                    width:'70px',
                      margin:'40px auto',
                      display:'block',
             }}></img>

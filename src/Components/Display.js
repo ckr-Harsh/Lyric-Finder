@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Route,Switch,Link} from 'react-router-dom'
 import Lyrics from './Lyrics'
+import { Iden } from './try'
 
 function Display(props) {
+    const [value,setvalue] = useContext(Iden);
 
  const Set = ()=>{
-     return(
-         <Lyrics id={props.t_id}/>
-     );
+    setvalue(props.t_id);
  }
     return (
         <>

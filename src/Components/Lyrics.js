@@ -1,18 +1,22 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState ,useContext} from 'react'
 import Axios from 'axios'
 import {Link} from 'react-router-dom'
+import Spinner from './Spinner'
+import { Iden } from './try';
 
-function Lyrics(props) {
+
+
+function Lyrics() {
     const [data,setData]=useState([]);
     const [Err, setErr] = useState();
-    const [spin ,setSpin]= useState(false);
+    const [value,setvalue]= useContext(Iden);
+    const [Spin ,setSpin]= useState(true);
 
     useEffect( ()=>{
-          //  Fetch();
+          // Fetch();
     },[]);
-
-    let id= props.id;
-   // console.log(id);
+    
+    let id= value;
       
         const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
                 const Fetch = async()=>{
@@ -20,10 +24,10 @@ function Lyrics(props) {
            .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${id}&apikey=${apiKey}`)
             .then( res=>{ 
                // console.log(res.data.message.body.lyrics);
-                let a = res.data.message.body.lyrics;
-                console.log(a);
-                setData(...a);
-              // data===''?setSpin(true):setSpin(false);
+                let result = [res.data.message.body.lyrics];
+                console.log(result);
+                setData(result);
+               data===''?setSpin(true):setSpin(false);
                         
             })
             .catch(err=>{
@@ -32,10 +36,7 @@ function Lyrics(props) {
             });
                 }
                 
-    const Lyrics= ()=>{
-    
-      //  spin===true?setSpin(false):setSpin(true);
-    }            
+           
     return (
         <>
         <Link to='/'>
@@ -43,12 +44,21 @@ function Lyrics(props) {
                 Back
             </button>
         </Link>
-        <h2>Lyrics:</h2>
-          <div>
+        <h2>{Err}</h2>
+          <div >
            {
-             
+             data.map(val=>{
+               return(
+                 <div>
+                    <h2>Lyrics:</h2>
+                    <p>{val.lyrics_body}</p>
+                    <h4>Copyright:<p>{val.lyrics_copyright}</p></h4>
+                 </div>
+               )
+             })
             }   
-          </div>  
+          </div> 
+          { Spin?<Spinner/>:''} 
         </>
     )
 }

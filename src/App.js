@@ -1,8 +1,7 @@
 import React from 'react'
-import Trail from './Components/trail'
 import Head from './Components/Head'
+import Try from './Components/try'
 import {BrowserRouter} from 'react-router-dom'
-import Context from './Components/Context'
  
 
 
@@ -10,9 +9,9 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <Context>
+    <Try>
       <Head/>
-    </Context>
+      </Try>
     </BrowserRouter>
     </>
   )
