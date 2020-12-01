@@ -19,7 +19,7 @@ function Display(props) {
                                 <h4 className='info'>Artist: {props.artist}</h4>
                                 <Link to='/lyrics'>
                                 <Button color="primary" onClick={Set}>
-                                     Get Links
+                                     Get Lyrics
                                 </Button>
                                 </Link>
                             </div>
