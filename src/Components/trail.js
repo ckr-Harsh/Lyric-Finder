@@ -12,7 +12,7 @@ function Trail() {
    
  
     useEffect(() => {
-     //Top();
+     Top();
     }, [])
 
     const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
@@ -39,10 +39,12 @@ function Trail() {
 
     return (
         <> 
-        <h2>Top 20 Tracks</h2>
+        <div className='header'>
+            <h2>Top 20 Tracks</h2>
+        </div>
+        <h2>{Err}</h2>
         <div className='tracks'>
-            <h2>{Err}</h2>
-            <ul>
+           
                 {
                     t.map((val,index)=>{
                         return(
@@ -53,11 +55,9 @@ function Trail() {
                             album={val.track.album_name}
                             t_id={val.track.track_id}
                             />
-                        
                         )
                     })
-                }     
-            </ul>
+                } 
         </div>
         { spin?<Spinner/>:''}
         </>

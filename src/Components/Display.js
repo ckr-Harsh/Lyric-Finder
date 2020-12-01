@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import {Route,Switch,Link} from 'react-router-dom'
 import Lyrics from './Lyrics'
-import { Iden } from './try'
+import { Iden } from './Context'
+import Button from '@material-ui/core/Button'
 
 function Display(props) {
     const [value,setvalue] = useContext(Iden);
@@ -9,31 +10,23 @@ function Display(props) {
  const Set = ()=>{
     setvalue(props.t_id);
  }
+  
     return (
         <>
-        <div className='cards'>
-          
-                            <div className='card'>
-                                <h2>{props.track}</h2>
-                                <h3>{props.album}</h3>
-                                <h3>{props.artist}</h3>
+                            <div className='track'>
+                                <h3 className='song'>{props.track}</h3>
+                                <h4 className='info'>Album: {props.album}</h4>
+                                <h4 className='info'>Artist: {props.artist}</h4>
                                 <Link to='/lyrics'>
-                                     <button
-                                     onClick={Set}
-                                     >Get Lyrics</button>
+                                <Button color="primary" onClick={Set}>
+                                     Get Links
+                                </Button>
                                 </Link>
                             </div>
             <Switch>
                 <Route path='/lyrics' component={Lyrics}/>
             </Switch>
                    
-                  
-        { /*   <Spinner style={{
-                visibility:props.spinTop?'visible':'hidden'
-            }} />
-        */}   
-        </div>
-       
         </>
     )
 }

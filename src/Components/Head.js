@@ -4,19 +4,43 @@ import {Route, Switch} from 'react-router-dom'
 import Trail from './trail'
 import {Link} from 'react-router-dom'
 import Lyrics from './Lyrics'
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import * as Mat from '@material-ui/icons'
+import './head.css'
 
 
 
 
-function Head(props) {
-   
-
+function Head() {
+ 
     return (
         <>
-           <h1>LyricFinder</h1>
+           <h1>LyricFinder
+              <span className='git'> 
+                <a  href='https://github.com/ckr-Harsh'>
+                <Mat.GitHub className='github'/>
+                </a>
+              </span>
+           </h1>
            <nav>
-               <Link to='/'>Top Tracks</Link>
-               <Link to='/search'>Search </Link>
+           <Paper square className='navbar'>
+        <Tabs 
+          variant="fullWidth"
+          indicatorColor="secondary"
+          textColor="secondary"
+          centered
+   
+        >
+          <Link to='/'>
+           <Tab icon={<Mat.List/>} label='Top Tracks'/>
+          </Link>
+          <Link to='/search'>
+            <Tab icon={<Mat.Search/>} label='Search'/>
+          </Link>
+           </Tabs>
+          </Paper>
            </nav>
 
             <div className='router'>
@@ -30,5 +54,6 @@ function Head(props) {
         </>
     )
 }
+
 
 export default Head

@@ -3,6 +3,8 @@ import Axios from 'axios'
 import Display from './Display';
 import * as Mat from '@material-ui/icons'
 import Spinner from './Spinner'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 
 
 function Search() {
@@ -16,7 +18,7 @@ function Search() {
     }
     const DoSearch=()=>{
         setSong('');
-       // Search();
+        Search();
         setSpin(true);
     }
     const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
@@ -39,31 +41,40 @@ function Search() {
         //console.log(props.song);
     return (
         <>
-        <div className='search_div'>
+        <div className='header'>
 
         <h2>
             <Mat.MusicNoteTwoTone/>
                 Enter the Name of the Song
             <Mat.MusicNoteTwoTone/>
         </h2>
-        <input 
-                    type='text'
-                    placeholder='Enter Name of the song'
-                    onChange={Song}
-                    value={song}
-                />
-                    <button 
-                    onClick={DoSearch}
-                    > Search</button>
+        <br/>
+        <div className='input'>
+        <TextField
+          label="Enter Song Name"
+          id="outlined-size-small"
+          placeholder='Enter Name of the song'
+          onChange={Song}
+          value={song}
+          variant="outlined"
+          size='small'
+        />
         </div>
-            <h2>Search Results</h2>
+        <div className='btn'>
+         <Button  variant="outlined" onClick={DoSearch} color="secondary">
+            Search
+         </Button>
+         </div>
+        </div>
+           
             <h3>
                 {Err}
             </h3>
-            <div className='tracks'>
+             <div className='tracks'>
                 {
                     res.map((val,index)=>{
                         return(
+                       
                             <Display
                             artist={val.track.artist_name}
                             track={val.track.track_name}
@@ -71,11 +82,12 @@ function Search() {
                             album={val.track.album_name}
                             t_id={val.track.track_id}
                             />
+                       
                         
                         )
                     })
                 }    
-        </div>
+             </div>
       { spin?<Spinner/>:''}
         </>
     )

@@ -1,10 +1,10 @@
 # :star: Lyric-Finder :star:
 
-### written in react.js using Hooks
+### written in react.js using Hooks and Context API
 
+![screenshot](/screenshot.png)
 
-
-This Project isn't completed yet.
+---
 
 
 contributions are appreciated.

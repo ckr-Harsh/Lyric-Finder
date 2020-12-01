@@ -2,7 +2,9 @@ import React, { useEffect,useState ,useContext} from 'react'
 import Axios from 'axios'
 import {Link} from 'react-router-dom'
 import Spinner from './Spinner'
-import { Iden } from './try';
+import { Iden } from './Context'
+import IconButton from '@material-ui/core/IconButton';
+import * as Mat from '@material-ui/icons'
 
 
 
@@ -13,7 +15,7 @@ function Lyrics() {
     const [Spin ,setSpin]= useState(true);
 
     useEffect( ()=>{
-          // Fetch();
+           Fetch();
     },[]);
     
     let id= value;
@@ -40,19 +42,20 @@ function Lyrics() {
     return (
         <>
         <Link to='/'>
-            <button>
-                Back
-            </button>
+        <IconButton aria-label="delete"  color="secondary">
+        <Mat.ArrowBack />
+      </IconButton>
         </Link>
         <h2>{Err}</h2>
           <div >
            {
              data.map(val=>{
                return(
-                 <div>
-                    <h2>Lyrics:</h2>
-                    <p>{val.lyrics_body}</p>
-                    <h4>Copyright:<p>{val.lyrics_copyright}</p></h4>
+                 <div className='lyrics'>
+                    <h2 className='song'>Lyrics:</h2>
+                    <p className='info'>{val.lyrics_body}</p>
+                    <h4 className='song'>Copyright:</h4>
+                    <p className='info'>{val.lyrics_copyright}</p>
                  </div>
                )
              })

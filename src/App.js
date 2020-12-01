@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from './Components/Head'
-import Try from './Components/try'
+import Try from './Components/Context'
 import {BrowserRouter} from 'react-router-dom'
  
 
