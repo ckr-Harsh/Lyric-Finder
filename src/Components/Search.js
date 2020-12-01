@@ -21,7 +21,7 @@ function Search() {
         Search();
         setSpin(true);
     }
-    const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
+   
     const Search =  async()=>{
         await Axios
         .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?

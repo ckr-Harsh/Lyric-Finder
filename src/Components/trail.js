@@ -15,7 +15,7 @@ function Trail() {
      Top();
     }, [])
 
-    const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
+    
     const Top = async()=>{
            const result = await Axios
            .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?

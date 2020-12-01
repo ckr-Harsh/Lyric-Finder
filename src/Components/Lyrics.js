@@ -20,7 +20,7 @@ function Lyrics() {
     
     let id= value;
       
-        const apiKey = '0f721c28a837fc8fd3d2d83f073539eb';
+        
                 const Fetch = async()=>{
                     await Axios
            .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${id}&apikey=${apiKey}`)
