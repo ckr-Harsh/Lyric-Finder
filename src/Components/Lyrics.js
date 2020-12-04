@@ -37,7 +37,7 @@ function Lyrics() {
                 setErr(`Try again,${err}`);
             });
                 }
-                
+         
            console.log( data.lyrics_body);
           const Small = ()=>{
                return(
