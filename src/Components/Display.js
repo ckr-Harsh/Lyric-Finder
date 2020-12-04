@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {Route,Switch,Link} from 'react-router-dom'
 import Lyrics from './Lyrics'
 import { Iden } from './Context'
@@ -7,9 +7,14 @@ import Button from '@material-ui/core/Button'
 function Display(props) {
     const [value,setvalue] = useContext(Iden);
 
- const Set = ()=>{
-    setvalue(props.t_id);
- }
+    useEffect(()=>{
+        Set();
+    },[props.track]);
+
+
+   const Set = ()=>{
+       setvalue(props.t_id);
+    }
   
     return (
         <>
@@ -18,7 +23,7 @@ function Display(props) {
                                 <h4 className='info'>Album: {props.album}</h4>
                                 <h4 className='info'>Artist: {props.artist}</h4>
                                 <Link to='/lyrics'>
-                                <Button color="primary" onClick={Set}>
+                                <Button color="primary" >
                                      Get Lyrics
                                 </Button>
                                 </Link>

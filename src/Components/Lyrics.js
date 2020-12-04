@@ -19,7 +19,7 @@ function Lyrics() {
     },[]);
     
     let id= value;
-      
+      let apiKey= '0f721c28a837fc8fd3d2d83f073539eb';
         
                 const Fetch = async()=>{
                     await Axios
@@ -29,7 +29,7 @@ function Lyrics() {
                 let result = [res.data.message.body.lyrics];
                 console.log(result);
                 setData(result);
-               data===''?setSpin(true):setSpin(false);
+               data.lyrics_body==='undefined'?setSpin(true):setSpin(false);
                         
             })
             .catch(err=>{
@@ -38,7 +38,21 @@ function Lyrics() {
             });
                 }
                 
-           
+           console.log( data.lyrics_body);
+          const Small = ()=>{
+               return(
+                 data.map(val=>{
+                      return(
+                           <div className='lyrics'>
+                           <h2 className='song'>Lyrics:</h2>
+                           <p className='info'>{val.lyrics_body}</p>
+                           <h4 className='song'>Copyright:</h4>
+                           <p className='info'>{val.lyrics_copyright}</p>
+                           </div>
+                            )
+                })
+             );   
+        }    
     return (
         <>
         <Link to='/'>
@@ -48,18 +62,7 @@ function Lyrics() {
         </Link>
         <h2>{Err}</h2>
           <div >
-           {
-             data.map(val=>{
-               return(
-                 <div className='lyrics'>
-                    <h2 className='song'>Lyrics:</h2>
-                    <p className='info'>{val.lyrics_body}</p>
-                    <h4 className='song'>Copyright:</h4>
-                    <p className='info'>{val.lyrics_copyright}</p>
-                 </div>
-               )
-             })
-            }   
+    {value==='undefined'?<Spinner/>:<Small/>} 
           </div> 
           { Spin?<Spinner/>:''} 
         </>

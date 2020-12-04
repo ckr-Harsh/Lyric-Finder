@@ -2,7 +2,7 @@ import React from 'react'
 import Search from './Search'
 import {Route, Switch} from 'react-router-dom'
 import Trail from './trail'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import Lyrics from './Lyrics'
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
@@ -11,10 +11,7 @@ import * as Mat from '@material-ui/icons'
 import './head.css'
 
 
-
-
 function Head() {
- 
     return (
         <>
            <h1>LyricFinder
@@ -33,12 +30,12 @@ function Head() {
           centered
    
         >
-          <Link to='/'>
+          <NavLink to='/' exact activeClassName='active'>
            <Tab icon={<Mat.List/>} label='Top Tracks'/>
-          </Link>
-          <Link to='/search'>
+          </NavLink>
+          <NavLink to='/search'exact activeClassName='active'>
             <Tab icon={<Mat.Search/>} label='Search'/>
-          </Link>
+          </NavLink>
            </Tabs>
           </Paper>
            </nav>
