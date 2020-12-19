@@ -1,14 +1,15 @@
-import React, {useState,useEffect, useContext, createContext} from 'react'
+import React, {useState} from 'react'
 import Axios from 'axios'
 import Display from './Display';
 import * as Mat from '@material-ui/icons'
 import Spinner from './Spinner'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import useLocalStorage from './Lstorage'
 
 
 function Search() {
-    const [res,setRes] = useState([]);
+    const [res,setRes] = useLocalStorage('res',[]);
     const [Err,setError] = useState();
     const [song,setSong] = useState();
     const [spin, setSpin] = useState(false);

@@ -1,72 +1,72 @@
-import React, { useEffect,useState ,useContext} from 'react'
+import React, { useEffect,useState } from 'react'
 import Axios from 'axios'
 import {Link} from 'react-router-dom'
 import Spinner from './Spinner'
-import { Iden } from './Context'
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import * as Mat from '@material-ui/icons'
+import useLocalStorage from './Lstorage'
 
 
 
-function Lyrics() {
-    const [data,setData]=useState([]);
+function Lyrics(props) {
+    const [data,setData]=useLocalStorage('data',{});
     const [Err, setErr] = useState();
-    const [value,setvalue]= useContext(Iden);
-    const [Spin ,setSpin]= useState(true);
 
     useEffect( ()=>{
            Fetch();
     },[]);
     
-    let id= value;
       let apiKey= '0f721c28a837fc8fd3d2d83f073539eb';
         
                 const Fetch = async()=>{
                     await Axios
-           .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${id}&apikey=${apiKey}`)
+           .get(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${props.match.params.id}&apikey=${apiKey}`)
             .then( res=>{ 
-               // console.log(res.data.message.body.lyrics);
-                let result = [res.data.message.body.lyrics];
-                console.log(result);
+                let result = res.data.message.body.lyrics;
                 setData(result);
-               data.lyrics_body==='undefined'?setSpin(true):setSpin(false);
                         
             })
             .catch(err=>{
-                console.log(err);
                 setErr(`Try again,${err}`);
             });
                 }
          
-           console.log( data.lyrics_body);
-          const Small = ()=>{
-               return(
-                 data.map(val=>{
-                      return(
-                           <div className='lyrics'>
-                           <h2 className='song'>Lyrics:</h2>
-                           <p className='info'>{val.lyrics_body}</p>
-                           <h4 className='song'>Copyright:</h4>
-                           <p className='info'>{val.lyrics_copyright}</p>
-                           </div>
-                            )
-                })
-             );   
-        }    
-    return (
-        <>
-        <Link to='/'>
-        <IconButton aria-label="delete"  color="secondary">
-        <Mat.ArrowBack />
-      </IconButton>
+const Show = ()=>{ 
+   if(
+       data===undefined ||
+       Object.keys(data).length ===0
+   ){
+       return(
+           <Spinner/>
+       );
+   }else{
+         return( 
+             <>
+         <Link to='/'>
+        <Button  startIcon={<Mat.ArrowBackOutlined/>} 
+                color="secondary"
+                size='small'
+                variant='outlined' >
+           Go Back
+      </Button>
         </Link>
         <h2>{Err}</h2>
-          <div >
-    {value==='undefined'?<Spinner/>:<Small/>} 
-          </div> 
-          { Spin?<Spinner/>:''} 
+                        <div className='lyrics'>
+                            <h2 className='song'>Lyrics:</h2>
+                            <p className='info'>{data.lyrics_body}</p>
+                            <h2 className='song'>Copyright:</h2>
+                            <p className='info'>{data.lyrics_copyright}</p>
+                            </div>
         </>
-    )
-}
+         );
 
-export default Lyrics
+   }
+    
+}
+return(
+    <>
+    <Show/>
+    </>
+)
+}
+export default Lyrics;

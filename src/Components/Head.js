@@ -44,7 +44,7 @@ function Head() {
               <Switch>
                     <Route exact path='/'component={Trail}/>
                     <Route exact path='/search' component={Search}/>
-                    <Route path='/lyrics' component={Lyrics}/>
+                    <Route path='/lyrics/:id' component={Lyrics}/>
               </Switch>
             </div>
          

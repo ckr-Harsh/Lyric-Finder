@@ -2,7 +2,6 @@ import React, { createContext, useState ,useEffect} from 'react'
 import Axios from 'axios'
 
 export const Track = createContext();
-export const Iden = createContext();
 function Try(props) {
     const [value,setvalue] = useState();
     const [t,setTrack] = useState([]);
@@ -29,9 +28,7 @@ function Try(props) {
     return (
         <>
         <Track.Provider value={[t,setTrack]}>
-            <Iden.Provider value={[value,setvalue]}>
                 {props.children}
-            </Iden.Provider>
         </Track.Provider>
         </>
     )
